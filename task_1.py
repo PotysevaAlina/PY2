@@ -28,7 +28,7 @@ class Bacteria:
         :return: Существует ли бактерия
         Примеры:
         >>> bacteria = Bacteria(0, 4600000)
-        >>> bacteria.is_unreal_bacteria()
+        >>> bacteria.is_unreal_bacteria(50, 3400000000)
         """
 
     def add_mutations_to_genome(self, add_mutations: int) -> None:
@@ -91,46 +91,93 @@ class Human:
         >>> human.is_unhealthy_haman()
         """
 
-    def add_weight(self, add_weight: float) -> None:
+    def increase_weight(self, increase_weight: float) -> None:
         """
         Набор веса
-        :param add_weight: Вес, который необходимо набрать
+        :param increase_weight: Вес, который необходимо набрать
         :raise ValueError: Если вес равен больше, чем число, получаемое при вычетании 100 из роста
         Примеры:
         >>> human = Human(160.5, 45)
-        >>> human.add_weight(10)
+        >>> human.increase_weight(10)
         """
-        if not isinstance(add_weight, (int, float)):
+        if not isinstance(increase_weight, (int, float)):
             raise TypeError("Добавляемый вес должен быть типа int или float")
-        if add_weight < 0:
+        if increase_weight < 0:
             raise ValueError("Добавляемый вес должен быть положительным числом")
 
 
-    def remove_weight(self, remove_weight: float) -> bool:
+    def decrease_weight(self, decrease_weight: float) -> bool:
         """
         Снижение веса
-        :param remove_weight: Количество снижаемого веса
+        :param decrease_weight: Количество снижаемого веса
         :return: Нужно ли сбрасывать вес
         Примеры:
         >>> human = Human(160.5, 100)
-        >>> human.remove_weight(50.8)
+        >>> human.decrease_weight(50.8)
         """
 
-        if not isinstance(remove_weight, float):
+        if not isinstance(decrease_weight, float):
             raise TypeError("Снижаемый вес должен быть типа int или float")
-        if remove_base_pairs < 0:
+        if decrease_weight < 0:
             raise ValueError("Снижаемый вес должен быть положительным числом")
 
+
 class Purchase:
-    def __init__(self, quantity, price):
-        self.quantity = int(quantity)
+    def __init__(self, quantity: int, price: (int, float)):
+        """
+        Создание и подготовка к работе объекта "Покупка"
+        :param quantity: Количество покупок
+        :param price: Цена покупок
+        Примеры:
+        >>> purchase = Purchase(4, 500) # инициализация экземпляра класса
+        """
+
+        if not isinstance(quantity, int):
+            raise TypeError("Количество объектов в покупке должно быть типа int")
+        if quantity <= 0:
+            raise ValueError("Количество объектов в покупке должно быть положительным числом")
+        self.quantity = quantity
+
         if not isinstance(price, (int, float)):
-            raise TypeError("Введенная цена должна быть типом int или float")
+            raise TypeError("Цена должна быть типа int или float")
+        if price <= 0:
+            raise ValueError("Цена должна быть положительным числом")
         self.price = price
-    def discount(self, price, quantity):
-        if price >= quantity * 8:
-            price == price * 0.9
-    def cost_purchase(self):
-        return self.price
+
+    def opportunity_to_buy(self, price, quantity) -> bool:
+        """
+        Функция, которая проверяет являются ли заданные параметры удобоваримыми для совершения покупки
+        :return: Существует ли возможность купить
+        Примеры:
+        >>> price = Purchase(10, 500)
+        >>> price.opportunity_to_buy(2, 500000)
+        """
+
+    def maximum_price(self, maximum_price: (int, float)) -> None:
+        """
+        Определение максимальной цены
+        :param maximum_price: Максимальная цуна
+        :return: Если максимальная цена больше 5000
+        Примеры:
+        >>> purchase = Purchase(10, 500)
+        >>> purchase.maximum_price(50)
+        """
+        if not isinstance(maximum_price, (int, float)):
+            raise TypeError("Цена должна быть типа int или float")
+        if maximum_price < 0:
+            raise ValueError("Цена должна быть положительным числом")
+
+    def discount(self, discount: int):
+        """
+        Получение скидки
+        :param discount: Размер скидки
+        :return: Цена после скидки
+        """
+
+        if not isinstance(discount, int):
+            raise TypeError("Скидка должна быть типа int")
+        if discount < 0:
+            raise ValueError("Скидка быть положительным числом")
+
 if __name__ == "__main__":
     doctest.testmod()  # тестирование примеров, которые находятся в документации
